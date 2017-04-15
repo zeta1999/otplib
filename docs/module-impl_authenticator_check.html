@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>TOTP - Documentation</title>
+    <title>impl/authenticator/check - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -28,7 +28,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">TOTP</h1>
+    <h1 class="page-title">impl/authenticator/check</h1>
     
 
     
@@ -40,9 +40,8 @@
 
 <header>
     
-        <h2>
-        TOTP
-        </h2>
+        
+            
         
     
 </header>
@@ -51,35 +50,115 @@
     <div class="container-overview">
     
         
+            <div class="description"><p>Checks the provided OTP token against system generated token</p></div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the OTP token to check</p></td>
+        </tr>
 
     
 
-    <h4 class="name" id="TOTP"><span class="type-signature"></span>new TOTP<span class="signature">()</span><span class="type-signature"></span></h4>
+        <tr>
+            
+                <td class="name"><code>secret</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>your secret that is used to generate the token</p></td>
+        </tr>
 
     
 
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
 
 
-<div class="description">
-    <p>Time-based One-time Password Algorithm</p>
-<h2>References</h2><ul>
-<li>http://tools.ietf.org/html/rfc6238</li>
-<li>http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm</li>
-</ul>
-<h2>Algorithm</h2><pre class="prettyprint source"><code>T0 be an epoch
-TS be the time stemp
-TC be the current timestamp turned into an int, using defined T0, counting in TS units
-TC = (unixtime(now) - unixtime(T0)) / TS
-TOTP = HOTP(secretsecret, TC), where the HOTP algorithm is defined below.
-TOTP-Value = TOTP mod 10d, where d is the desired number of digits of the one-time password.</code></pre>
-</div>
+            
+            </td>
 
+            
 
+            
 
+            <td class="description last"><p>options which was used to generate it originally</p></td>
+        </tr>
 
-
-
-
+    
+    </tbody>
+</table>
 
 
 
@@ -91,9 +170,6 @@ TOTP-Value = TOTP mod 10d, where d is the desired number of digits of the one-ti
     
 
     
-    <dt class="tag-since">Since:</dt>
-    <dd class="tag-since"><ul class="dummy"><li>3.0.0</li></ul></dd>
-    
 
     
 
@@ -108,19 +184,9 @@ TOTP-Value = TOTP mod 10d, where d is the desired number of digits of the one-ti
     
 
     
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>Gerald Yeo</li>
-        </ul>
-    </dd>
-    
 
     
 
-    
-    <dt class="tag-license">License:</dt>
-    <dd class="tag-license"><ul class="dummy"><li>MIT</li></ul></dd>
     
 
     
@@ -128,7 +194,7 @@ TOTP-Value = TOTP mod 10d, where d is the desired number of digits of the one-ti
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="classes_TOTP.js.html">classes/TOTP.js</a>, <a href="classes_TOTP.js.html#line5">line 5</a>
+        <a href="impl_authenticator_check.js.html">impl/authenticator/check.js</a>, <a href="impl_authenticator_check.js.html#line4">line 4</a>
     </li></ul></dd>
     
 
@@ -151,22 +217,30 @@ TOTP-Value = TOTP mod 10d, where d is the desired number of digits of the one-ti
 
 
 
-
-
-
-    
-    </div>
-
-    
-        <h3 class="subsection-title">Extends</h3>
+<h5>Returns:</h5>
 
         
 
 
-    <ul>
-        <li><a href="HOTP.html">HOTP</a></li>
-    </ul>
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
 
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+    </div>
 
     
 
