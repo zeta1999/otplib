@@ -83,10 +83,10 @@
 <li><a href="#available-options">Available Options</a></li>
 </ul>
 </li>
+<li><a href="#seed-secret-length">Seed / secret length</a></li>
 <li><a href="#google-authenticator">Google Authenticator</a><ul>
 <li><a href="#difference-between-authenticator-and-totp">Difference between Authenticator and TOTP</a></li>
 <li><a href="#base32-keys-and-rfc3548">Base32 Keys and RFC3548</a></li>
-<li><a href="#seed-secret-length">Seed / secret length</a></li>
 <li><a href="#displaying-a-qr-code">Displaying a QR code</a></li>
 </ul>
 </li>
@@ -115,28 +115,28 @@ dealing with OTP generation and verification.</p>
 
 const secret = otplib.authenticator.generateSecret();
 const token = otplib.authenticator.generate(secret);
+
 const isValid = otplib.authenticator.check(123456, secret);
-
 // or
-
 const isValid = otplib.authenticator.verify({
   secret,
   token: 123456
 });</code></pre><h4>Using specific OTP implementations</h4><p>If you want to include a specific OTP specification, you can import it directly:</p>
 <pre class="prettyprint source lang-js"><code>import hotp from 'otplib/hotp';
 import totp from 'otplib/totp';
-import authenticator from 'otplib/authenticator';</code></pre><p>Do note that you'll have to provide a crypto solution (this is to allow custom crypto solutions),
-as long as they implement <code>createHmac</code> and <code>randomBytes</code>. Take a look at the
-<a href="https://github.com/yeojz/otplib/blob/master/packages/otplib-browser">browser implementation</a> for an example</p>
+import authenticator from 'otplib/authenticator';</code></pre><p><strong>Note</strong>: If you import the libraries directly, you'll have to provide a crypto
+solution (this is to allow custom crypto solutions), as long as they implement <code>createHmac</code> and <code>randomBytes</code>.
+Take a look at the <a href="https://github.com/yeojz/otplib/blob/master/packages/otplib-browser">browser implementation</a>
+of this package as an example.</p>
 <p>i.e.</p>
 <pre class="prettyprint source lang-js"><code>import authenticator from 'otplib/authenticator';
 import crypto from 'crypto';
-authenticator.options = {crypto}
+authenticator.options = { crypto }
 
 // Or if you're using the other options
-// hotp.options = {crypto}
-// totp.options = {crypto}</code></pre><h4>Using classes</h4><p>For ease of use, the default exports are all instantiated instances of their respective classes.
-You can access the original classes via it's same name property of an instantiated class.</p>
+// hotp.options = { crypto }
+// totp.options = { crypto }</code></pre><h4>Using classes</h4><p>For ease of use, the default exports are all instantiated instances of their respective classes.
+You can access the original classes via it's same name property of the instantiated class.</p>
 <p>i.e</p>
 <pre class="prettyprint source lang-js"><code>
 import hotp from 'otplib/hotp';
@@ -161,8 +161,11 @@ You'll need to add the following scripts to your code:</p>
 <li>Download from <a href="https://github.com/yeojz/otplib/tree/gh-pages/lib">gh-pages</a>.</li>
 <li>Use unpkg.com</li>
 </ul>
-<pre class="prettyprint source lang-html"><code>&lt;script src=&quot;https://unpkg.com/otplib@^6.0.0/otplib-browser.js&quot;>&lt;/script></code></pre><p>For a live example, the <a href="https://yeojz.github.io/otplib">project site</a> has been built using <code>otplib-browser.js</code>. The source code can be found <a href="https://github.com/yeojz/otplib/tree/master/site">here</a>.</p>
-<h4>Browser Compatibility</h4><p>In order to reduce the size of the browser package, the <code>crypto</code> package has been replaced with a alternative implementation. The current implementation depends on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array">Uint8Array</a> and the browser's native <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/crypto">crypto</a> methods, which may only be available in recent browser versions.</p>
+<pre class="prettyprint source lang-html"><code>&lt;script src=&quot;https://unpkg.com/otplib@^6.0.0/otplib-browser.js&quot;>&lt;/script></code></pre><p>For a live example, the <a href="https://yeojz.github.io/otplib">project site</a> has been built using <code>otplib-browser.js</code>.
+The source code can be found <a href="https://github.com/yeojz/otplib/tree/master/site">here</a>.</p>
+<h4>Browser Compatibility</h4><p>In order to reduce the size of the browser package, the <code>crypto</code> package has been replaced with
+an alternative implementation. The current implementation depends on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array">Uint8Array</a>
+and the browser's native <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/crypto">crypto</a> methods, which may only be available in recent browser versions.</p>
 <p>To find out more about the replacements, you can take a look at <code>packages/otplib-browser/crypto.js</code></p>
 <p><strong>Output sizes:</strong></p>
 <ul>
@@ -184,19 +187,19 @@ You'll need to add the following scripts to your code:</p>
 </tr>
 <tr>
 <td><a href="https://yeojz.github.io/otplib/docs/module-otplib-core.html">core.js</a></td>
-<td>All functions for various steps in OTP generation</td>
+<td>Functions for various steps in the OTP generation process</td>
 </tr>
 <tr>
 <td><a href="https://yeojz.github.io/otplib/docs/module-otplib-hotp.html">hotp.js</a></td>
-<td>Wraps core functions into a instantiated HOTP class</td>
+<td>Wraps core functions into an instantiated HOTP class</td>
 </tr>
 <tr>
 <td><a href="https://yeojz.github.io/otplib/docs/module-otplib.html">otplib.js</a></td>
-<td>Entry file for this library</td>
+<td>Library entry file, containing all instances with crypto set up</td>
 </tr>
 <tr>
 <td><a href="https://yeojz.github.io/otplib/docs/module-otplib-totp.html">totp.js</a></td>
-<td>Wraps core functions into a instantiated TOTP class</td>
+<td>Wraps core functions into an instantiated TOTP class</td>
 </tr>
 <tr>
 <td><a href="https://yeojz.github.io/otplib/docs/module-otplib-utils.html">utils.js</a></td>
@@ -219,14 +222,15 @@ You'll need to add the following scripts to your code:</p>
 </tbody>
 </table>
 <p>For more information about the functions, check out the <a href="https://yeojz.github.io/otplib/docs">documentation</a>.</p>
-<h2>Notes</h2><h3>Setting Custom Options</h3><p>All instantiated classes will have their options inherited from their respective options generator. i.e. HOTP from <code>hotpOptions</code> and TOTP/Authenticator from <code>totpOptions</code>.</p>
+<h2>Notes</h2><h3>Setting Custom Options</h3><p>All instantiated classes will have their options inherited from their respective options
+generator. i.e. HOTP from <code>hotpOptions</code> and TOTP/Authenticator from <code>totpOptions</code>.</p>
 <p>All OTP classes have an object setter and getter method to override these default options.</p>
 <p>For example,</p>
 <pre class="prettyprint source lang-js"><code>import otplib from 'otplib';
 
 // setting
 otplib.authenticator.options = {
-   step: 30
+  step: 30
 }
 
 // getting
@@ -271,12 +275,13 @@ otplib.authenticator.resetOptions();</code></pre><h4>Available Options</h4><tabl
 <td>encoding</td>
 <td>string</td>
 <td>'ascii' ('hex' for Authenticator)</td>
+<td>The encoding of secret which is given to digest</td>
 </tr>
 <tr>
 <td>epoch (totp)</td>
 <td>integer</td>
 <td>null</td>
-<td>starting time since the UNIX epoch (seconds). <em>Note</em> non-javascript epoch. i.e. <code>new Date().getTime() / 1000</code></td>
+<td>starting time since the UNIX epoch (seconds). <em>Note</em> non-javascript epoch. i.e. <code>Date.now() / 1000</code></td>
 </tr>
 <tr>
 <td>step (totp)</td>
@@ -286,6 +291,10 @@ otplib.authenticator.resetOptions();</code></pre><h4>Available Options</h4><tabl
 </tr>
 </tbody>
 </table>
+<h3>Seed / secret length</h3><p>In <a href="http://tools.ietf.org/html/rfc6238">RFC 6238</a>, the secret / seed length for different algorithms is predefined:</p>
+<pre class="prettyprint source"><code>HMAC-SHA1 - 20 bytes
+HMAC-SHA256 - 32 bytes
+HMAC-SHA512 - 64 bytes</code></pre><p>As such, the length of the secret is padded and sliced according to the expected length for respective algrorithms.</p>
 <h3>Google Authenticator</h3><h4>Difference between Authenticator and TOTP</h4><p>The default encoding option has been set to <code>hex</code> (Authenticator) instead of <code>ascii</code> (TOTP).</p>
 <h4>Base32 Keys and RFC3548</h4><p>Google Authenticator requires keys to be base32 encoded.
 It also requires the base32 encoder to be <a href="http://tools.ietf.org/html/rfc3548">RFC 3548</a> compliant.</p>
@@ -293,11 +302,7 @@ It also requires the base32 encoder to be <a href="http://tools.ietf.org/html/rf
 <pre class="prettyprint source lang-js"><code>import authenticator from 'otplib/authenticator';
 
 const secret = authenticator.generateSecret(); // base 32 encoded hex secret key
-const token = authenticator.generate(secret);</code></pre><h4>Seed / secret length</h4><p>In <a href="http://tools.ietf.org/html/rfc6238">RFC 6238</a>, the secret / seed length for different algorithms is predefined:</p>
-<pre class="prettyprint source"><code>HMAC-SHA1 - 20 bytes
-HMAC-SHA256 - 32 bytes
-HMAC-SHA512 - 64 bytes</code></pre><p>As such, the length of the secret is padded and sliced according to the expected length for respective algrorithms.</p>
-<h4>Displaying a QR code</h4><p>You may want to generate and display a QR Code so that users can scan instead of manually entering the secret.
+const token = authenticator.generate(secret);</code></pre><h4>Displaying a QR code</h4><p>You may want to generate and display a QR Code so that users can scan instead of manually entering the secret.
 Google Authenticator and similar apps take in a QR code that holds a URL with the protocol <code>otpauth://</code>,
 which you get from <code>otplib.authenticator.keyuri</code>.</p>
 <p>While this library provides the &quot;otpauth&quot; uri, you'll need a library to generate the QR Code image.</p>
@@ -308,7 +313,7 @@ import otplib from 'otplib';
 
 const otpauth = otplib.authenticator.keyuri('user', 'service', secret);
 
-qrcode.toDataURL(otpauth, function (err, imageUrl) {
+qrcode.toDataURL(otpauth, (err, imageUrl) => {
   if (err) {
     console.log('Error with QR');
     return;
@@ -330,7 +335,7 @@ qrcode.toDataURL(otpauth, function (err, imageUrl) {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon Sep 04 2017 05:49:21 GMT+0000 (UTC) using the Minami theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sun Oct 22 2017 13:25:58 GMT+0000 (UTC) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
