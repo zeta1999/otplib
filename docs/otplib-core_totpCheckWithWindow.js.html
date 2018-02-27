@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>otplib-utils/hexToInt.js - Documentation</title>
+    <title>otplib-core/totpCheckWithWindow.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -28,7 +28,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">otplib-utils/hexToInt.js</h1>
+    <h1 class="page-title">otplib-core/totpCheckWithWindow.js</h1>
     
 
     
@@ -38,18 +38,40 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Converts Hex into an Integer
- *
- * @module otplib-utils/hexToInt
- * @param {string} value - the hex value to convert
- * @return {string}
- */
-function hexToInt(hex) {
-  return parseInt(hex, 16);
+            <pre class="prettyprint source linenums"><code>import totpCheck from './totpCheck';
+
+function getPrevWindowOption(options, windowCount) {
+  return Object.assign(options, {
+    epoch: options.epoch - (options.step * windowCount)
+  });
 }
 
-export default hexToInt;
+/**
+ * Checks the provided OTP token against system generated token
+ * with support for checking previous x time-step windows
+ *
+ * @module otplib-core/totpCheckWithWindow
+ * @param {string} token - the OTP token to check
+ * @param {string} secret - your secret that is used to generate the token
+ * @param {object} options - options which was used to generate it originally
+ * @return {boolean}
+ */
+function totpCheckWithWindow(token, secret, options) {
+  let opt = Object.assign({}, options);
+  const rounds = Math.floor(opt.window || 0) + 1;
+
+  for (let i = 0; i &lt; rounds; i++) {
+    opt = getPrevWindowOption(opt, i);
+
+    if (totpCheck(token, secret, opt)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+export default totpCheckWithWindow;
 </code></pre>
         </article>
     </section>
