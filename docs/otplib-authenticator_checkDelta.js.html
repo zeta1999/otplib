@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>otplib-authenticator - Documentation</title>
+    <title>otplib-authenticator/checkDelta.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,142 +29,38 @@
 
 <div id="main">
     
-    <h1 class="page-title">otplib-authenticator</h1>
+    <h1 class="page-title">otplib-authenticator/checkDelta.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { totpCheckWithWindow } from 'otplib-core';
+import decodeKey from './decodeKey';
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Instance of Authenticator</p>
-<p>Google Authenticator library</p>
-<pre class="prettyprint source lang-js"><code> import crypto from 'crypto';
- import authenticator from 'otplib/authenticator';
+/**
+ * Checks the provided OTP token against system generated token
+ * Returns the delta (window) which token passes.
+ * Returns null otherwise.
+ *
+ * @module otplib-authenticator/checkDelta
+ * @param {string} token - the OTP token to check
+ * @param {string} secret - your secret that is used to generate the token
+ * @param {object} options - options which was used to generate it originally
+ * @return {integer | null}
+ */
+function checkDelta(token, secret, options) {
+  return totpCheckWithWindow(token, decodeKey(secret), options);
+}
 
- authenticator.options = {
-   crypto
- }
-
- authenticator.generate(...)
- authenticator.check(...)
- authenticator.generateSecret(...)</code></pre></div>
-        
-
-        
-            
-<div class="section-method">
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-    <dt class="tag-since">Since:</dt>
-    <dd class="tag-since"><ul class="dummy"><li>3.0.0</li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="otplib-authenticator_index.js.html">otplib-authenticator/index.js</a>, <a href="otplib-authenticator_index.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+export default checkDelta;
+</code></pre>
+        </article>
+    </section>
 
 
 

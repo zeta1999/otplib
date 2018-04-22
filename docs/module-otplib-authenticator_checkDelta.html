@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>otplib-authenticator - Documentation</title>
+    <title>otplib-authenticator/checkDelta - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">otplib-authenticator</h1>
+    <h1 class="page-title">otplib-authenticator/checkDelta</h1>
     
 
     
@@ -51,18 +51,9 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Instance of Authenticator</p>
-<p>Google Authenticator library</p>
-<pre class="prettyprint source lang-js"><code> import crypto from 'crypto';
- import authenticator from 'otplib/authenticator';
-
- authenticator.options = {
-   crypto
- }
-
- authenticator.generate(...)
- authenticator.check(...)
- authenticator.generateSecret(...)</code></pre></div>
+            <div class="description"><p>Checks the provided OTP token against system generated token
+Returns the delta (window) which token passes.
+Returns null otherwise.</p></div>
         
 
         
@@ -79,9 +70,6 @@
 
     
 
-    
-    <dt class="tag-since">Since:</dt>
-    <dd class="tag-since"><ul class="dummy"><li>3.0.0</li></ul></dd>
     
 
     
@@ -107,7 +95,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="otplib-authenticator_index.js.html">otplib-authenticator/index.js</a>, <a href="otplib-authenticator_index.js.html#line3">line 3</a>
+        <a href="otplib-authenticator_checkDelta.js.html">otplib-authenticator/checkDelta.js</a>, <a href="otplib-authenticator_checkDelta.js.html#line4">line 4</a>
     </li></ul></dd>
     
 
@@ -126,6 +114,108 @@
 
 
 
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>the OTP token to check</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>secret</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>your secret that is used to generate the token</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>object</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>options which was used to generate it originally</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -137,6 +227,32 @@
 
 
 
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>integer</code></span>
+|
+
+<span class="param-type"><code>null</code></span>
+
+
+    </dd>
+</dl>
+
+
+    
+</div>
 
 
 
