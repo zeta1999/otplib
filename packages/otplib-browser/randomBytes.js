@@ -7,7 +7,7 @@
  *
  * @module otplib-browser/randomBytes
  * @param {string} size - the size
- * @return {string}
+ * @return {Buffer}
  */
 function randomBytes(size) {
   const crypto = window.crypto || window.msCrypto;

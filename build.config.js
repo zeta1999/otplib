@@ -4,6 +4,12 @@ const browsers = {
   }
 };
 
+const nodejs = {
+  targets: {
+    node: '6'
+  }
+};
+
 module.exports = {
   otplib: {
     bundler: 'rollup',
@@ -41,6 +47,12 @@ module.exports = {
     bundler: 'webpack',
     babel: {
       presets: [['env', browsers]]
+    }
+  },
+  'otplib-expo': {
+    bundler: 'webpack',
+    babel: {
+      presets: [['env', nodejs]]
     }
   }
 };

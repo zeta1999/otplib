@@ -80,9 +80,12 @@ $ npm install @types/node
 
 ## Upgrading
 
-This library follows `semver`. As such, major version bumps usually mean API changes or behavior changes. Please check [upgrade notes](https://github.com/yeojz/otplib/wiki/upgrade-notes) for more information, especially before making any major upgrades.
+This library follows `semver`. As such, major version bumps usually mean API changes or behavior changes.
+Please check [upgrade notes](https://github.com/yeojz/otplib/wiki/upgrade-notes) for more information,
+especially before making any major upgrades.
 
-You might also want to check out the release notes associated with each tagged versions in the [releases](https://github.com/yeojz/otplib/releases) page.
+You might also want to check out the release notes associated with each tagged versions
+in the [releases](https://github.com/yeojz/otplib/releases) page.
 
 ## Getting Started
 
@@ -112,7 +115,7 @@ import totp from 'otplib/totp';
 import authenticator from 'otplib/authenticator';
 ```
 
-**Note**: If you import the libraries directly, you'll have to provide a crypto
+**Note**: If you import the libraries directly, you will have to provide a crypto
 solution (this is to allow custom crypto solutions), as long as they implement `createHmac` and `randomBytes`.
 Take a look at the [browser implementation](https://github.com/yeojz/otplib/blob/master/packages/otplib-browser)
 of this package as an example.
@@ -148,6 +151,12 @@ const TOTP = totp.TOTP;
 import authenticator from 'otplib/authenticator';
 const Authenticator = authenticator.Authenticator;
 // const inst = new Authenticator();
+
+// Alternatively, you can get it from the default module as well
+import otplib from 'otplib';
+const HOTP = otplib.hotp.HOTP
+const TOTP = otplib.totp.TOTP
+const Authenticator = otplib.authenticator.Authenticator
 ```
 
 **Example Usage**
@@ -227,11 +236,14 @@ Ihis library been split and classified into 6 core files with other specific env
 
 ### Other Bundles
 
-| file                                                                                     | description                                   |
-| ---------------------------------------------------------------------------------------- | --------------------------------------------- |
-| [otplib-browser.js](https://yeojz.github.io/otplib/docs/module-otplib-browser.html.html) | Browser compatible package built with webpack |
+| file                                                                                  | description                                                                                                                                                                                                                                                           |
+| ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [otplib-browser.js](https://yeojz.github.io/otplib/docs/module-otplib-browser.html)   | Browser compatible package built with webpack                                                                                                                                                                                                                         |
+| [otplib-expo.js](https://yeojz.github.io/otplib/docs/module-otplib-expo.html) (alpha) | Package modified for `expo.io`, built with webpack ([read more](https://github.com/yeojz/otplib/pull/18)). <br /> _Note_: I have **not** personally tested the `otplib-expo` module. <br /> If the main library works in newer expo releases, I would recommend that. |
 
 For more information about the functions, check out the [documentation][project-docs].
+
+
 
 ## Notes
 
@@ -262,22 +274,16 @@ otplib.authenticator.resetOptions();
 
 #### Available Options
 
-| Option           | Type             | Defaults                          | Description                                                                                                                                                                  |
-| ---------------- | ---------------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| algorithm        | string           | 'sha1'                            | Algorithm used for HMAC                                                                                                                                                      |
-| createHmacSecret | function         | hotpSecret, totpSecret            | Transforms the secret and applies any modifications like padding to it.                                                                                                      |
-| crypto           | object           | node crypto                       | Crypto module to use.                                                                                                                                                        |
-| digits           | integer          | 6                                 | The length of the token                                                                                                                                                      |
-| encoding         | string           | 'ascii' ('hex' for Authenticator) | The encoding of secret which is given to digest                                                                                                                              |
-| epoch (totp)     | integer          | null                              | Starting time since the UNIX epoch (seconds).                                                                                                                                |
-| step (totp)      | integer          | 30                                | Time step (seconds)                                                                                                                                                          |
-| window (totp)    | integer or array | 0                                 | Tokens in the previous and future x-windows that should be considered valid. If integer, same value will be used for both. Alternatively, define array: `[previous, future]` |
-
-_Note 1_: epoch format is non-javascript. i.e. `Date.now() / 1000`
-
-_Note 2_: non "totp" label applies to all
-
-_Note 3_: "totp" applies to authenticator as well
+| Option                       | Type             | Defaults                          | Description                                                                                                                                                                                |
+| ---------------------------- | ---------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| algorithm                    | string           | 'sha1'                            | Algorithm used for HMAC                                                                                                                                                                    |
+| createHmacSecret             | function         | hotpSecret, totpSecret            | Transforms the secret and applies any modifications like padding to it.                                                                                                                    |
+| crypto                       | object           | node crypto                       | Crypto module to use.                                                                                                                                                                      |
+| digits                       | integer          | 6                                 | The length of the token                                                                                                                                                                    |
+| encoding                     | string           | 'ascii' ('hex' for authenticator) | The encoding of secret which is given to digest                                                                                                                                            |
+| epoch (totp, authenticator)  | integer          | null                              | Starting time since the UNIX epoch (seconds).  <br /> epoch format is non-javascript. i.e. `Date.now() / 1000`                                                                             |
+| step (totp, authenticator)   | integer          | 30                                | Time step (seconds)                                                                                                                                                                        |
+| window (totp, authenticator) | integer or array | 0                                 | Tokens in the previous and future x-windows that should be considered valid. <br /> If integer, same value will be used for both. <br /> Alternatively, define array: `[previous, future]` |
 
 ### Seed / secret length
 
@@ -289,7 +295,7 @@ HMAC-SHA256 - 32 bytes
 HMAC-SHA512 - 64 bytes
 ```
 
-As such, the length of the secret is padded and sliced according to the expected length for respective algrorithms.
+As such, the length of the secret is padded and sliced according to the expected length for respective algorithms.
 
 ### Google Authenticator
 
@@ -302,7 +308,8 @@ The default encoding option has been set to `hex` (Authenticator) instead of `as
 Google Authenticator requires keys to be base32 encoded.
 It also requires the base32 encoder to be [RFC 3548][rfc-3548] compliant.
 
-OTP calculation will still work should you want to use other base32 encoding methods (like Crockford's Base 32) but it will NOT be compatible with Google Authenticator.
+OTP calculation will still work should you want to use other base32 encoding methods (like Crockford's Base 32)
+but it will NOT be compatible with Google Authenticator.
 
 ```js
 import authenticator from 'otplib/authenticator';
