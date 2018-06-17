@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>otplib-utils/removeSpaces - Documentation</title>
+    <title>otplib-core/totpTimeRemaining - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">otplib-utils/removeSpaces</h1>
+    <h1 class="page-title">otplib-core/totpTimeRemaining</h1>
     
 
     
@@ -51,7 +51,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Removes all spaces</p></div>
+            <div class="description"><p>Calculates the number of seconds till next tick for TOTP</p></div>
         
 
         
@@ -93,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="otplib-utils_removeSpaces.js.html">otplib-utils/removeSpaces.js</a>, <a href="otplib-utils_removeSpaces.js.html#line1">line 1</a>
+        <a href="otplib-core_totpTimeRemaining.js.html">otplib-core/totpTimeRemaining.js</a>, <a href="otplib-core_totpTimeRemaining.js.html#line3">line 3</a>
     </li></ul></dd>
     
 
@@ -137,13 +137,13 @@
 
         <tr>
             
-                <td class="name"><code>value</code></td>
+                <td class="name"><code>epoch</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>string</code></span>
+<span class="param-type"><code>number</code></span>
 
 
             
@@ -154,7 +154,33 @@
             
 
             <td class="description last">
-                <p>string to parse</p>
+                <p>starting time since the JavasSript epoch (seconds) (UNIX epoch * 1000)</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>step</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>time step (seconds)</p>
                 
             </td>
         </tr>
@@ -187,12 +213,18 @@
     </dt>
     <dd>
         
-<span class="param-type"><code>string</code></span>
+<span class="param-type"><code>number</code></span>
 
 
     </dd>
 </dl>
 
+
+<div class="param-desc">
+    <ul>
+<li>in seconds</li>
+</ul>
+</div>
 
     
 </div>
